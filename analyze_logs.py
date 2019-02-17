@@ -7,7 +7,7 @@ from geoip import open_database
 
 class Logcheck:
 
-    def __init__(self, logfiles_folder=".\\Logfiles\\access*"):
+    def __init__(self, logfiles_folder):
         self.countries = []
         self.ips = []
         self.files = glob.glob(logfiles_folder)
@@ -150,7 +150,7 @@ class Logcheck:
 
 
 if __name__ == "__main__":
-    check = Logcheck()
+    check = Logcheck(logfiles_folder=".\\Logfiles\\access*.log*")
     # x = check.get_ip_date_n_location()
 
     check.plot_ranking(sort_type="ip", top_n=50)
