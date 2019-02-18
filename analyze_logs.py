@@ -7,12 +7,12 @@ from geoip import open_database
 
 class Logcheck:
 
-    def __init__(self, logfiles_folder):
+    def __init__(self, logfiles_folder, geoip_database_location='./db.mmdb'):
         self.countries = []
         self.ips = []
         self.files = glob.glob(logfiles_folder)
         self.ordered_log = [""] * len(self.files)
-        self.db = open_database('./db.mmdb')
+        self.db = open_database(geoip_database_location)
         self.sort_files()
         self.get_ip_date_n_location()
 
@@ -42,7 +42,7 @@ class Logcheck:
                 raw_log_dict.extend(temp_log_file.readlines())
         return raw_log_dict
 
-    def get_ip_date_n_location(self) -> dict:
+    def get_ip_date_n_location(self):
         '''
         Generate array from logs. Each entry contains a dict in this format {"ip", "date", "country_code/location"}
         '''
